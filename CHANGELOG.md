@@ -2,6 +2,145 @@
 
 This document includes the same release notes as in the [Releases](https://github.com/valinet/ExplorerPatcher/releases) section on GitHub.
 
+## 22621.3007.63
+
+Tested on OS builds 22000.2538, 22621.1992, 22621.3007, 22621.3085, and 22621.3155.
+
+##### 1
+
+* **Fixed a bug where `explorer.exe` would crash repeatedly when the system is in OOBE.** (36ebe5a)
+  * ExplorerPatcher now no longer loads if it detects that the system is in OOBE or in credential reset.
+* Taskbar10: The Network and Battery flyouts on later 22621 builds onwards and Windows 10 now open instantly without issues. (97fd483)
+* Taskbar10: Allowed the use of search box (without highlights) on Windows 11. (0157ecc)
+  * **The behavior when the Start or Search menu is open is currently not the same as Windows 10, and we have no plans to fix this yet. Please do not make new Issues regarding this.**
+* Start10: Added proper handling when the Windows 10 start menu is not available (e.g. 24H2/Canary builds). (3c8809e)
+* Start10: Removed the original method for fixing Jump List (right click) views. (79b0f68)
+* File Explorer: The address bar shrinking is now more accurate with pixel-perfect height compared to Windows 7, 8.1, and 10 (without the modern search). (e0b97e2)
+* GUI: Added "Uninstall" section containing a button to launch the uninstaller. (0c5021b)
+* Setup: There should now be fewer .prev files, and uninstallation should be cleaner as well. (296c6a0)
+* Symbols: Added `explorer.exe` symbols for 22621+ and unified the method for Windows 10 Alt+Tab on 22000. (1f2e2c4)
+* Localization: Added translations for Lithuanian, Polish, Russian, and Turkish.
+
+##### 2
+
+* Taskbar10: Improved animation performance when centering and/or EP Weather is not enabled, also fixed search box positioning on small taskbar without centering. (22d9e3c)
+* Setup: Fixed a bug that placed `wincorlib.dll` on Windows 10 when it is not supposed to, causing the start menu to crash. (610ba7f)
+
+##### 3
+
+* Taskbar10: Fixed flyout positioning on Windows 11 26058+. (dfe340d)
+* Slightly improved performance when interacting with the taskbar, both new and old. (dfe340d)
+
+##### 4
+
+* Setup: Reverted the method for ending `explorer.exe` and its subprocesses. (fdc357b)
+
+## 22621.2861.62
+
+Tested on OS builds 22621.2715, 22621.2861, 22631.2787, 22631.2861, 22635.2915, and 23590.1000.
+
+##### 1
+
+* Taskbar10: Various *important* fixes: (ec68783)
+  * Revised the method for enabling the old taskbar due to a very rare issue where the old taskbar couldn't be enabled with the previous method. (#2499)
+  * Fixed crash on 25921+ due to the removal of pnidui.dll. (#2558)
+  * Fixed potential stability issues when using the new taskbar on 22621.2787+.
+* Taskbar10: Fixed white boxes on submenus when context menu skinning is disabled. (72f1458)
+* File Explorer: Fixed crashes when using Windows 7/10 control interface on OS builds 22635.2915+. (3a1b8b8)
+* Localization: Added translations for French, German, Hungarian, Korean, Romanian, and Ukrainian.
+  * The properties window has been made slightly wider to accomodate the newly added languages. (#2574)
+* Localization: Added a language switcher to the About section of Properties window. (7c3be29, a7a3d27)
+
+##### 2
+
+* Symbols: Fixed languages with longer strings such as French crashing Explorer when attempting to download symbols. (ce9f973)
+
+**Note:** Due to the breakages as well as frequent changes happening in Canary builds, we strongly do not recommend using ExplorerPatcher on Canary builds for now.
+
+## 22621.2506.60
+
+Tested on OS builds 22000.2416, 22000.2538, 22621.2361, 22621.2506, 22621.2715, 22631.2787, 23585.1001, and 23590.1000.
+
+#### Details
+
+##### 1
+
+* Taskbar10: Fixed Windows 11 Start menu and Search positioning on builds 22621.2787+ and 23545+ (Dev). (ac268b1, 7d0cdde)
+* File Explorer: Added option to disable the modern navigation bar of Moment 4. (2dc1340)
+* File Explorer: Restored "Apply Mica" functionality on OS builds 22621+. (f62c532)
+* Localization: Officially added translations for the following languages: Chinese (Simplified), Chinese (Traditional), Dutch, Indonesian, Japanese
+  * Thanks to [everyone involved](https://github.com/valinet/ExplorerPatcher-L10N#acknowledgements)!
+* GUI: Decoupled the Properties window into `ep_gui.dll` from the main DLL in order to reduce the main DLL size and to allow scalable localization. (f6f6d89, 639d7aa)
+  * `rundll32 C:\Windows\dxgi.dll,ZZGUI` will continue to work as before.
+
+#### ⚠️ Important notice for translators ⚠️
+
+In this update, most if not all user-facing parts of ExplorerPatcher have been made localizable.
+
+* The English texts have been put together into [here](https://github.com/valinet/ExplorerPatcher/tree/master/ep_gui/resources/lang) and [here](https://github.com/valinet/ExplorerPatcher/tree/master/ep_setup/resources/lang).
+* Non-English texts have been designed to be put into [this separate repository](https://github.com/valinet/ExplorerPatcher-L10N). Feel free to make a PR there if you want to contribute to translations.
+* Some texts have been updated to be more concise and accurate, so for existing translation fork maintainers, please double check the translations before making a PR to the said repository.
+* Also for translation fork maintainers, a large number of conflicts will happen if you decide to continue merging changes from the main repository.
+* Please let us know through Issues if there are still user-facing parts of ExplorerPatcher that are not localizable.
+
+We apologize for the additional work that this change might cause. We hope that this one-time change will make it easier for translators to localize ExplorerPatcher and also easier for both translators and users to keep ExplorerPatcher up to date.
+
+## 22621.2428.59
+
+Tested on OS builds 22000.2416, 22621.2428, 23555.1000, and 23560.1000.
+
+#### Details
+
+##### 1
+
+Note: After updating to this version, the symbols will be re-downloaded even if they have been downloaded before.
+
+* Taskbar10: Fixed Control Center and Toast Center positioning on build 25951 (Canary). (dca0b3a)
+* Taskbar10: Fixed start menu position when the taskbar is at the left or right side on Moment 4 builds. (a57471f)
+* Taskbar10: Fixed the Windows 10 taskbar background patch to not crash anymore on build 25951 (Canary). (b52bd79)
+* Taskbar10: Made classic theme taskbar fonts more accurate. Thanks @aubymori! (8fc53a1)
+* Start10: Fixed a bug where certain texts in the Windows 10 Start menu stayed in English. (655e62c, 5321766)
+* Start10: Properly fixed start menu showing/hiding along with its original animations on builds 22000.65+. (7e2f768)
+* GUI: Fixed a bug where "Remember last used section" doesn't remember the current page after being enabled. (11160c8)
+* Symbols: Reworked how symbols are managed so that symbols don't need to be successfully downloaded in succession. (8412bd6)
+* Setup: Fixed uninstallation of EP installations that have went through upgrades before the proper Pin to Start fix. (845d2b5, a7c87ce)
+
+## 22621.2361.58
+
+Tested on OS builds 22000.2416, 22621.1, 22621.2134, 22621.2361, 22631.2338, and 23545.1000.
+
+#### Details
+
+##### 1
+
+* Taskbar10: Fixed Windows 10 taskbar not showing up on Windows 11 builds with "Never combine" on the new taskbar. (bc3bbc7)
+* Taskbar10: Fixed pen menu crashing `explorer.exe` on 22621.2134+. (1977d78)
+* Taskbar11: Fixed a bug that crashed `explorer.exe` when right clicking the new taskbar on Windows 11 builds with "Never combine" on the new taskbar. (6023718)
+* File Explorer: EP now tries to avoid crashes related to the new Windows App SDK views. (b426d2c)
+* On OS builds 22621+, fixed a bug that crashed `explorer.exe` when required functions in `twinui.pcshell.dll` (for Win+X and Windows 10 Alt+Tab) could not be found using the fallback method. (6023718)
+
+##### 2
+
+* Taskbar11: Fixed a bug that reset the "never combine" setting on OS builds 22621.2361+ (#2207) (085b3dd)
+* Taskbar10: Fixed Wi-Fi flyout buttons on OS build 22621 (0706393)
+* Start10: Fixed start menu folders, show recently added, and show frequently used apps settings not being applied on OS builds 22621.2134+ (e28940d)
+
+##### 3
+
+* Start10: Pin to Start/Unpin from Start has been properly fixed on Start Menu and Explorer (but not Search yet) of all Windows 11 builds. (15c07a0)
+* Start10: Fixed non-UWP apps not appearing on Dev channel builds 23545+. (a4f5bd0)
+* File Explorer: Fixed command bar settings not being applied on non-primary Explorer instances on Windows 11. (001e8d8)
+
+##### 4
+
+* Taskbar11: Restored the fix for the bug that reset the "never combine" setting on OS builds 22621.2361+, which was removed in 22621.2361.58.3 by accident. (9f04110)
+* Start: "Start menu style" now requires restart so that Pin to Start/Unpin from Start on Explorer works properly. (bdd71ef)
+* Taskbar10: Disabled the patch for proper acrylic background on Canary builds (25000+) for now. (4ee742f)
+
+Many thanks to @Amrsatrio for sustained efforts in maintaining and improving ExplorerPatcher.
+
+Thanks to @ARestrepo228 for hints on fixing Pin to Start/Unpin from Start.
+
 ## 22621.2283.57
 
 Tested on OS build 22621.2283. Installer requires Internet connectivity.
